@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">PentaClock</string>
+    <string name="clock1">India</string>
+    <string name="clock2">Sydney</string>
+    <string name="clock3">San Jose</string>
+    <string name="clock4">Paris</string>
+    <string name="clock5">London</string>
+    <string name="clock1placeholder">CLOCK1</string>
+    <string name="clock2placeholder">CLOCK2</string>
+    <string name="clock3placeholder">CLOCK3</string>
+    <string name="clock4placeholder">CLOCK4</string>
+    <string name="clock5placeholder">CLOCK5</string>
+    <string name="title_activity_timezone_selector">Timezone Selector</string>
+    <string name="title_activity_main">PentaClock</string>
+    <string name="popup_header">Enter a Label</string>
+    <string name="popup_cancel">Cancel</string>
+    <string name="popup_save">Save</string>
+</resources>
