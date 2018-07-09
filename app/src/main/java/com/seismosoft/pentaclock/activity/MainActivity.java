@@ -1,11 +1,14 @@
 package com.seismosoft.pentaclock.activity;
 
 import android.app.Activity;
+import android.app.WallpaperManager;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.seismosoft.dualclock.R;
@@ -31,12 +34,20 @@ public class MainActivity extends AppCompatActivity {
     TextView clockzoneTextView4;
     TextView clockzoneTextView5;
 
+    LinearLayout clock1_ll;
+    LinearLayout clock2_ll;
+    LinearLayout clock3_ll;
+    LinearLayout clock4_ll;
+    LinearLayout clock5_ll;
+
     Date currentTime;
     DateFormat formatter1;
     DateFormat formatter2;
     DateFormat formatter3;
     DateFormat formatter4;
     DateFormat formatter5;
+
+    LinearLayout main_ll;
 
     final Handler handler = new Handler();
     final int ACTIVITY_RESULT_TAG_TIMEZONE1_REQ_CODE = 2001;
@@ -66,6 +77,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        main_ll = findViewById(R.id.main_ll);
+
+        final WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
+        final Drawable wallpaperDrawable = wallpaperManager.getDrawable();
+
+        main_ll.setBackground(wallpaperDrawable);
+
         clockTextView1 = (TextView)findViewById(R.id.clock1);
         clockTextView2 = (TextView)findViewById(R.id.clock2);
         clockTextView3 = (TextView)findViewById(R.id.clock3);
@@ -78,11 +97,57 @@ public class MainActivity extends AppCompatActivity {
         clockzoneTextView4 = (TextView)findViewById(R.id.clockzone4);
         clockzoneTextView5 = (TextView)findViewById(R.id.clockzone5);
 
-        formatter1 = new SimpleDateFormat("hh:mm:ss a,\n dd-MM-yyyy");
-        formatter2 = new SimpleDateFormat("hh:mm:ss a,\n dd-MM-yyyy");
-        formatter3 = new SimpleDateFormat("hh:mm:ss a,\n dd-MM-yyyy");
-        formatter4 = new SimpleDateFormat("hh:mm:ss a,\n dd-MM-yyyy");
-        formatter5 = new SimpleDateFormat("hh:mm:ss a,\n dd-MM-yyyy");
+        clock1_ll = findViewById(R.id.clock_1_ll);
+        clock2_ll = findViewById(R.id.clock_2_ll);
+        clock3_ll = findViewById(R.id.clock_3_ll);
+        clock4_ll = findViewById(R.id.clock_4_ll);
+        clock5_ll = findViewById(R.id.clock_5_ll);
+
+        clock1_ll.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                selectTimezone(v);
+                return true;
+            }
+        });
+
+        clock2_ll.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                selectTimezone(v);
+                return true;
+            }
+        });
+
+        clock3_ll.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                selectTimezone(v);
+                return true;
+            }
+        });
+
+        clock4_ll.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                selectTimezone(v);
+                return true;
+            }
+        });
+
+        clock5_ll.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                selectTimezone(v);
+                return true;
+            }
+        });
+
+        formatter1 = new SimpleDateFormat("E, dd-MM-yyyy\nhh:mm:ss a");
+        formatter2 = new SimpleDateFormat("E, dd-MM-yyyy\nhh:mm:ss a");
+        formatter3 = new SimpleDateFormat("E, dd-MM-yyyy\nhh:mm:ss a");
+        formatter4 = new SimpleDateFormat("E, dd-MM-yyyy\nhh:mm:ss a");
+        formatter5 = new SimpleDateFormat("E, dd-MM-yyyy\nhh:mm:ss a");
 
         tinydb = new TinyDB(getApplicationContext());
         if (tinydb.getBoolean("NOTFIRSTRUN") == false) {
@@ -137,27 +202,27 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TimezoneSelectorActivity.class);
 
         switch (view.getId()) {
-            case R.id.button1: {
+            case R.id.clock_1_ll: {
                 startActivityForResult(intent, ACTIVITY_RESULT_TAG_TIMEZONE1_REQ_CODE);
                 break;
             }
 
-            case R.id.button2: {
+            case R.id.clock_2_ll: {
                 startActivityForResult(intent, ACTIVITY_RESULT_TAG_TIMEZONE2_REQ_CODE);
                 break;
             }
 
-            case R.id.button3: {
+            case R.id.clock_3_ll: {
                 startActivityForResult(intent, ACTIVITY_RESULT_TAG_TIMEZONE3_REQ_CODE);
                 break;
             }
 
-            case R.id.button4: {
+            case R.id.clock_4_ll: {
                 startActivityForResult(intent, ACTIVITY_RESULT_TAG_TIMEZONE4_REQ_CODE);
                 break;
             }
 
-            case R.id.button5: {
+            case R.id.clock_5_ll: {
                 startActivityForResult(intent, ACTIVITY_RESULT_TAG_TIMEZONE5_REQ_CODE);
                 break;
             }

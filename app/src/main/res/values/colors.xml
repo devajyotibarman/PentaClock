@@ -9,4 +9,6 @@
     <color name="teal">#00bfff</color>
     <color name="orange">#ffa500</color>
     <color name="bg">#6e010d23</color>
+    <color name="bgx">#ad232323</color>
+
 </resources>

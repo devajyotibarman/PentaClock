@@ -5,11 +5,11 @@
     <string name="clock3">San Jose</string>
     <string name="clock4">Paris</string>
     <string name="clock5">London</string>
-    <string name="clock1placeholder">CLOCK1</string>
-    <string name="clock2placeholder">CLOCK2</string>
-    <string name="clock3placeholder">CLOCK3</string>
-    <string name="clock4placeholder">CLOCK4</string>
-    <string name="clock5placeholder">CLOCK5</string>
+    <string name="clock1ph">CLOCK1</string>
+    <string name="clock2ph">CLOCK2</string>
+    <string name="clock3ph">CLOCK3</string>
+    <string name="clock4ph">CLOCK4</string>
+    <string name="clock5ph">CLOCK5</string>
     <string name="title_activity_timezone_selector">Timezone Selector</string>
     <string name="title_activity_main">PentaClock</string>
     <string name="popup_header">Enter a Label</string>
