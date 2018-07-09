@@ -1,14 +1,20 @@
 package com.seismosoft.pentaclock.activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.WallpaperManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.seismosoft.dualclock.R;
@@ -47,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
     DateFormat formatter4;
     DateFormat formatter5;
 
-    LinearLayout main_ll;
+    ScrollView main_ll;
+
+    final int MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE = 200;
 
     final Handler handler = new Handler();
     final int ACTIVITY_RESULT_TAG_TIMEZONE1_REQ_CODE = 2001;
@@ -80,10 +88,26 @@ public class MainActivity extends AppCompatActivity {
 
         main_ll = findViewById(R.id.main_ll);
 
-        final WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
-        final Drawable wallpaperDrawable = wallpaperManager.getDrawable();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,  new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
 
-        main_ll.setBackground(wallpaperDrawable);
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        } else {
+            final WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
+            final Drawable wallpaperDrawable = wallpaperManager.getDrawable();
+            main_ll.setBackground(wallpaperDrawable);
+        }
 
         clockTextView1 = (TextView)findViewById(R.id.clock1);
         clockTextView2 = (TextView)findViewById(R.id.clock2);
@@ -196,6 +220,29 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         handler.post(runnable);
         super.onResume();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    final WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
+                    final Drawable wallpaperDrawable = wallpaperManager.getDrawable();
+                    main_ll.setBackground(wallpaperDrawable);
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     public void selectTimezone(View view) {

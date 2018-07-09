@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
+    android:background="@drawable/bg2"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    android:id="@+id/main_ll">
+    >
 
     <ScrollView
+        android:id="@+id/main_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/bgx">
