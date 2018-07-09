@@ -1,20 +1,13 @@
 package com.seismosoft.pentaclock.activity;
 
-import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.WallpaperManager;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.seismosoft.dualclock.R;
@@ -77,22 +70,23 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    @SuppressLint("SimpleDateFormat")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        clockTextView1 = (TextView)findViewById(R.id.clock1);
-        clockTextView2 = (TextView)findViewById(R.id.clock2);
-        clockTextView3 = (TextView)findViewById(R.id.clock3);
-        clockTextView4 = (TextView)findViewById(R.id.clock4);
-        clockTextView5 = (TextView)findViewById(R.id.clock5);
+        clockTextView1 = findViewById(R.id.clock1);
+        clockTextView2 = findViewById(R.id.clock2);
+        clockTextView3 = findViewById(R.id.clock3);
+        clockTextView4 = findViewById(R.id.clock4);
+        clockTextView5 = findViewById(R.id.clock5);
 
-        clockzoneTextView1 = (TextView)findViewById(R.id.clockzone1);
-        clockzoneTextView2 = (TextView)findViewById(R.id.clockzone2);
-        clockzoneTextView3 = (TextView)findViewById(R.id.clockzone3);
-        clockzoneTextView4 = (TextView)findViewById(R.id.clockzone4);
-        clockzoneTextView5 = (TextView)findViewById(R.id.clockzone5);
+        clockzoneTextView1 = findViewById(R.id.clockzone1);
+        clockzoneTextView2 = findViewById(R.id.clockzone2);
+        clockzoneTextView3 = findViewById(R.id.clockzone3);
+        clockzoneTextView4 = findViewById(R.id.clockzone4);
+        clockzoneTextView5 = findViewById(R.id.clockzone5);
 
         clock1_ll = findViewById(R.id.clock_1_ll);
         clock2_ll = findViewById(R.id.clock_2_ll);
@@ -147,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         formatter5 = new SimpleDateFormat("E, dd-MM-yyyy\nhh:mm:ss a");
 
         tinydb = new TinyDB(getApplicationContext());
-        if (tinydb.getBoolean("NOTFIRSTRUN") == false) {
+        if (!tinydb.getBoolean("NOTFIRSTRUN")) {
             tinydb.putBoolean("NOTFIRSTRUN", true);
             tinydb.putString("CLOCKTZDB1", "Asia/Kolkata");
             tinydb.putString("CLOCKTZDB2", "Australia/Sydney");
@@ -239,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         Bundle extras = intent.getExtras();
+        assert extras != null;
         String message = extras.getString("TIMEZONE");
         String label = extras.getString("LABEL");
 

@@ -1,6 +1,5 @@
 package com.seismosoft.pentaclock.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -16,8 +15,6 @@ import java.util.TimeZone;
 
 public class TimezoneSelectorActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerview;
-    private LinearLayoutManager linearLayoutManager;
     TimezoneAdapter tzAdapter;
     List<String> tz;
 
@@ -26,11 +23,8 @@ public class TimezoneSelectorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timezone_selector);
 
-        Intent intent =  getIntent();
-
-
-        recyclerview = (RecyclerView) findViewById(R.id.timezone_list_recyclerview);
-        linearLayoutManager = new LinearLayoutManager(this);
+        RecyclerView recyclerview = findViewById(R.id.timezone_list_recyclerview);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 
         recyclerview.setLayoutManager(linearLayoutManager);
 

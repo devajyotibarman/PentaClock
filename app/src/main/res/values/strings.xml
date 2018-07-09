@@ -15,4 +15,5 @@
     <string name="popup_header">Enter a Label</string>
     <string name="popup_cancel">Cancel</string>
     <string name="popup_save">Save</string>
+    <string name="hint">hint</string>
 </resources>

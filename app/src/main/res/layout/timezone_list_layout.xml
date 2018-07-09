@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/tz_listview">
+    android:id="@+id/tz_listview"
+    android:clickable="true"
+    android:focusable="true">
 
     <TextView
         android:id="@+id/tz_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="3"
-        android:text="TextView"
         android:textSize="24sp"
         android:layout_gravity="center_vertical"
         android:layout_margin="16dp"

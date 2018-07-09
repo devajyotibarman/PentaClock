@@ -1,5 +1,6 @@
 package com.seismosoft.pentaclock.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +40,7 @@ public class TimezoneAdapter extends RecyclerView.Adapter<TimezoneAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final TimezoneAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final TimezoneAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         holder.tz_textView.setText(timezone_list.get(position));
 
         if(last_checked_pos == position) {
@@ -55,14 +57,14 @@ public class TimezoneAdapter extends RecyclerView.Adapter<TimezoneAdapter.ViewHo
                 Toast.makeText(timezone_activity.getApplicationContext(), "Selected: " + timezone_list.get(position), Toast.LENGTH_SHORT).show();
 
                 LayoutInflater inflater = timezone_activity.getLayoutInflater();
-                View alertLayout = inflater.inflate(R.layout.label_popup, null);
-                final EditText clock_label =  (EditText) alertLayout.findViewById(R.id.label);
+                @SuppressLint("InflateParams") View alertLayout = inflater.inflate(R.layout.label_popup, null);
+                final EditText clock_label = alertLayout.findViewById(R.id.label);
                 clock_label.setHint(timezone_list.get(position));
 
                 final AlertDialog.Builder alert = new AlertDialog.Builder(timezone_activity);
                 alert.setView(alertLayout);
                 alert.setCancelable(false);
-                alert.setTitle("Enter a Label");
+                alert.setTitle("Enter a Label for the clock");
 
                 alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
@@ -93,6 +95,13 @@ public class TimezoneAdapter extends RecyclerView.Adapter<TimezoneAdapter.ViewHo
                 dialog.show();
             }
         });
+
+        holder.tz_linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.tz_radioButton.performClick();
+            }
+        });
     }
 
     @Override
@@ -101,13 +110,16 @@ public class TimezoneAdapter extends RecyclerView.Adapter<TimezoneAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView tz_textView;
-        public RadioButton tz_radioButton;
+        TextView tz_textView;
+        RadioButton tz_radioButton;
+        LinearLayout tz_linearLayout;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-            tz_textView = (TextView) itemView.findViewById(R.id.tz_text);
-            tz_radioButton = (RadioButton) itemView.findViewById(R.id.tz_radio);
+            tz_textView = itemView.findViewById(R.id.tz_text);
+            tz_radioButton = itemView.findViewById(R.id.tz_radio);
+            tz_linearLayout = itemView.findViewById(R.id.tz_listview);
+
         }
     }
 }
