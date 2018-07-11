@@ -16,4 +16,6 @@
     <string name="popup_cancel">Cancel</string>
     <string name="popup_save">Save</string>
     <string name="hint">hint</string>
+    <string name="dialog_Sselect_label">Enter a label for the clock</string>
+    <string name="dialog_select_color">Select clock color</string>
 </resources>

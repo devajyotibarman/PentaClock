@@ -1,33 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/bg">
 
     <TextView
-        android:id="@+id/textInputLayout"
-        android:layout_width="368dp"
+        android:id="@+id/label_TextView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/dialog_Sselect_label"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="center"/>
 
     <EditText
-        android:inputType="text"
-        android:id="@+id/label"
+        android:id="@+id/label_editText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:padding="8dp"
+        android:hint="@string/hint"
+        android:inputType="text"
         android:singleLine="true"
         android:textSize="24sp"
-        android:hint="@string/hint"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</android.support.constraint.ConstraintLayout>
+        android:background="@color/bgx"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/color_TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/dialog_select_color"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
+
+    <com.thebluealliance.spectrum.SpectrumPalette
+        android:id="@+id/palette"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:spectrum_autoPadding="true"
+        app:spectrum_colors="@array/demo_colors"
+        app:spectrum_columnCount="5"
+        android:layout_gravity="center" />
+</LinearLayout>

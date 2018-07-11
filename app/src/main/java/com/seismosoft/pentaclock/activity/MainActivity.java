@@ -153,6 +153,11 @@ public class MainActivity extends AppCompatActivity {
             tinydb.putString("CLOCKLABELDB3", "San Jose");
             tinydb.putString("CLOCKLABELDB4", "London");
             tinydb.putString("CLOCKLABELDB5", "Paris");
+            tinydb.putInt("CLOCKCOLORDB1", 0xFFe51c23);
+            tinydb.putInt("CLOCKCOLORDB2", 0xFFe51c23);
+            tinydb.putInt("CLOCKCOLORDB3", 0xFFe51c23);
+            tinydb.putInt("CLOCKCOLORDB4", 0xFFe51c23);
+            tinydb.putInt("CLOCKCOLORDB5", 0xFFe51c23);
         }
 
         formatter1.setTimeZone(TimeZone.getTimeZone(tinydb.getString("CLOCKTZDB1")));
@@ -166,6 +171,18 @@ public class MainActivity extends AppCompatActivity {
         clockzoneTextView3.setText(tinydb.getString("CLOCKLABELDB3"));
         clockzoneTextView4.setText(tinydb.getString("CLOCKLABELDB4"));
         clockzoneTextView5.setText(tinydb.getString("CLOCKLABELDB5"));
+
+        clockzoneTextView1.setTextColor(tinydb.getInt("CLOCKCOLORDB1"));
+        clockzoneTextView2.setTextColor(tinydb.getInt("CLOCKCOLORDB2"));
+        clockzoneTextView3.setTextColor(tinydb.getInt("CLOCKCOLORDB3"));
+        clockzoneTextView4.setTextColor(tinydb.getInt("CLOCKCOLORDB4"));
+        clockzoneTextView5.setTextColor(tinydb.getInt("CLOCKCOLORDB5"));
+
+        clockTextView1.setTextColor(tinydb.getInt("CLOCKCOLORDB1"));
+        clockTextView2.setTextColor(tinydb.getInt("CLOCKCOLORDB2"));
+        clockTextView3.setTextColor(tinydb.getInt("CLOCKCOLORDB3"));
+        clockTextView4.setTextColor(tinydb.getInt("CLOCKCOLORDB4"));
+        clockTextView5.setTextColor(tinydb.getInt("CLOCKCOLORDB5"));
 
 
         clockThread();
@@ -236,46 +253,62 @@ public class MainActivity extends AppCompatActivity {
         assert extras != null;
         String message = extras.getString("TIMEZONE");
         String label = extras.getString("LABEL");
+        int color = extras.getInt("COLOR");
 
         // check if the request code is same as what is passed  here it is 2
         switch (requestCode) {
             case ACTIVITY_RESULT_TAG_TIMEZONE1_REQ_CODE: {
                 formatter1.setTimeZone(TimeZone.getTimeZone(message));
                 clockzoneTextView1.setText(label);
+                clockzoneTextView1.setTextColor(color);
+                clockTextView1.setTextColor(color);
                 tinydb.putString("CLOCKTZDB1", message);
                 tinydb.putString("CLOCKLABELDB1", label);
+                tinydb.putInt("CLOCKCOLORDB1", color);
                 break;
             }
 
             case ACTIVITY_RESULT_TAG_TIMEZONE2_REQ_CODE:{
                 formatter2.setTimeZone(TimeZone.getTimeZone(message));
                 clockzoneTextView2.setText(label);
+                clockzoneTextView2.setTextColor(color);
+                clockTextView2.setTextColor(color);
                 tinydb.putString("CLOCKTZDB2", message);
                 tinydb.putString("CLOCKLABELDB2", label);
+                tinydb.putInt("CLOCKCOLORDB2", color);
                 break;
             }
 
             case ACTIVITY_RESULT_TAG_TIMEZONE3_REQ_CODE: {
                 formatter3.setTimeZone(TimeZone.getTimeZone(message));
                 clockzoneTextView3.setText(label);
+                clockzoneTextView3.setTextColor(color);
+                clockTextView3.setTextColor(color);
                 tinydb.putString("CLOCKTZDB3", message);
                 tinydb.putString("CLOCKLABELDB3", label);
+                tinydb.putInt("CLOCKCOLORDB3", color);
                 break;
             }
 
             case ACTIVITY_RESULT_TAG_TIMEZONE4_REQ_CODE: {
                 formatter4.setTimeZone(TimeZone.getTimeZone(message));
                 clockzoneTextView4.setText(label);
+                clockzoneTextView4.setTextColor(color);
+                clockTextView4.setTextColor(color);
                 tinydb.putString("CLOCKTZDB4", message);
                 tinydb.putString("CLOCKLABELDB4", label);
+                tinydb.putInt("CLOCKCOLORDB4", color);
                 break;
             }
 
             case ACTIVITY_RESULT_TAG_TIMEZONE5_REQ_CODE: {
                 formatter5.setTimeZone(TimeZone.getTimeZone(message));
                 clockzoneTextView5.setText(label);
+                clockzoneTextView5.setTextColor(color);
+                clockTextView5.setTextColor(color);
                 tinydb.putString("CLOCKTZDB5", message);
                 tinydb.putString("CLOCKLABELDB5", label);
+                tinydb.putInt("CLOCKCOLORDB5", color);
                 break;
             }
 

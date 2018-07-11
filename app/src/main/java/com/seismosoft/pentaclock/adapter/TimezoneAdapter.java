@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.seismosoft.dualclock.R;
+import com.thebluealliance.spectrum.SpectrumPalette;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class TimezoneAdapter extends RecyclerView.Adapter<TimezoneAdapter.ViewHo
     private List<String> timezone_list;
     private Activity timezone_activity;
     private int last_checked_pos = -1;
+    private int selected_color;
 
     public TimezoneAdapter(Activity mActivity, List<String> tz) {
         this.timezone_list = tz;
@@ -58,14 +60,20 @@ public class TimezoneAdapter extends RecyclerView.Adapter<TimezoneAdapter.ViewHo
 
                 LayoutInflater inflater = timezone_activity.getLayoutInflater();
                 @SuppressLint("InflateParams") View alertLayout = inflater.inflate(R.layout.label_popup, null);
-                final EditText clock_label = alertLayout.findViewById(R.id.label);
+                final EditText clock_label = alertLayout.findViewById(R.id.label_editText);
                 clock_label.setHint(timezone_list.get(position));
+
+                final SpectrumPalette spectrumPalette =  alertLayout.findViewById(R.id.palette);
+                spectrumPalette.setOnColorSelectedListener(new SpectrumPalette.OnColorSelectedListener() {
+                    @Override
+                    public void onColorSelected(int color) {
+                        selected_color = color;
+                    }
+                });
 
                 final AlertDialog.Builder alert = new AlertDialog.Builder(timezone_activity);
                 alert.setView(alertLayout);
                 alert.setCancelable(false);
-                alert.setTitle("Enter a Label for the clock");
-
                 alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
                     @Override
@@ -85,6 +93,8 @@ public class TimezoneAdapter extends RecyclerView.Adapter<TimezoneAdapter.ViewHo
                                 } else {
                                     mBundle.putString("LABEL", clock_label.getText().toString());
                                 }
+
+                                mBundle.putInt("COLOR", selected_color);
                                 intent.putExtras(mBundle);
                                 timezone_activity.setResult(Activity.RESULT_OK, intent);
                                 timezone_activity.finish();
